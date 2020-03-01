@@ -2,7 +2,10 @@ package com.capstone.percs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +31,11 @@ public class LoginController {
 	// it finds that user and then checks the password making sure it matches and then login user. 
 	@PostMapping(value = "/login")
 	// The ModelAttribute "user" pertains to the class/bean called User.
-	public String validateUserCredentials(@ModelAttribute("user") User user, ModelMap model) {
+	public String validateUserCredentials(@ModelAttribute("user") User user, ModelMap model, HttpSession session) {
+		
+		
+		
+		
 		// This associates the attribute from the input 'name=username' in the jsp and must be the same name as the 
 		// attribute in the the class/bean
 		ModelMap userLogin = model.addAttribute("username", user.getUsername());
@@ -37,11 +44,12 @@ public class LoginController {
 		ModelMap userPass = model.addAttribute("password", user.getPassword());
 		
 		String testUserName = userLogin.getAttribute("username").toString();
-		System.out.println(userPass);
+//		System.out.println(userPass);
 		String testUserPassword = userPass.getAttribute("password").toString();
 		
 		// Getting the full User record here. Finding it by username
 		User dbUser = userRepo.findByUsername((String) userLogin.getAttribute("username"));
+		session.setAttribute("user", dbUser);
 		
 		if (testUserName.equals(dbUser.getUsername()) && testUserPassword.equals(dbUser.getPassword())) {
 			return "/businesses";
@@ -50,6 +58,20 @@ public class LoginController {
 			return "login-error";
 
 		}
+	}
+	
+	
+	@PostMapping(path = "/registered") // Map ONLY POST Requests
+//	public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
+	public String addNewUser(@RequestParam String userName, @RequestParam String email, @RequestParam String pass) {
+		User n = new User();
+		n.setUsername(userName);
+		n.setPassword(pass);
+		n.setEmail(email);
+		userRepo.save(n);
+
+		return "test";
+
 	}
 
 }

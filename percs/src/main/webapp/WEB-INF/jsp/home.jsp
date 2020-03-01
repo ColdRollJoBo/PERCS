@@ -8,7 +8,60 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="nav-bar">
+		<div class="nav-container">
+			<a href="home" class="nav-item-home">Home</a> 
+			<a href="register" class="nav-item-login">Login</a>
+		</div>
+	</div>
+
+	<div class="home-container">
+		<div class="home-img">
+			<img src="/img/site-art/home-image.png" alt="">
+		</div>
+
+
+
+		<div class="main-info">
+			<div class="main-info-section-1">
+				<div>
+					<img src="/img/site-art/punch-icon-perc.png" style="width: 20%" alt="">
+				</div>
+				<h1>P.E.R.C.S.</h1>
+				<p>A new and easy way small businesses can transition into the
+					digital age and not spend large amounts of capital to make a custom
+					app.</p>
+			</div>
+			<div class="main-info-section-2">
+				<div>
+					<img src="/img/site-art/punch-icon-increase.png" style="width: 20%"
+						alt="">
+				</div>
+				<h1>Increase Business</h1>
+				<p style="padding: 10px">Our new digital punch-card system will
+					help bring in repeat customers while also attracting new customers
+					when they view participating businesses.</p>
+
+			</div>
+			<div class="main-info-section-3">
+				<div>
+					<img src="/img/site-art/punch-icon-save.png" style="width: 20%"
+						alt="">
+				</div>
+				<h1>Always Save!</h1>
+				<p style="padding: 10px">This new application is a win for
+					businesses as well as customers since they will never lose out on
+					the great savings by not having the physical punch card.</p>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<!-- <div class="nav-bar">
       <div class="nav-container">
         <a href="/home" class="nav-items">Home</a>
         <a href="register" class="nav-items">Register</a>
@@ -73,6 +126,6 @@
 			<img src="/img/site-art/coming-soon-2.jpg" alt=""
 				style="width: auto; height: 500px">
 		</div>
-	</div>
+	</div> -->
 </body>
 </html>
