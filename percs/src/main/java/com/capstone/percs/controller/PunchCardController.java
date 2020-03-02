@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capstone.percs.entities.Business;
 import com.capstone.percs.entities.Promotion;
@@ -37,11 +38,13 @@ public class PunchCardController {
 	@Autowired
 	private UserRepo userRepo;
 	
+	// TODO: Refactor code so that we can use the methods below for multiple businesses. 
 
 	@RequestMapping(value = "/topdog")
 	public String getPunchcard(@ModelAttribute("punchcard") PunchCard pcard, ModelMap model, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");
+		model.addAttribute("username", user.getUsername());
 		
 		// Finding the business and then finding their promotion.
 		long busId = busRepo.findByBusName("JoesTopDog").getId();
@@ -49,7 +52,6 @@ public class PunchCardController {
 		
 		Business bus = busRepo.findByBusName("JoesTopDog");
 		session.setAttribute("business", bus);
-		
 		// If a card does not exist in the pcardRepo with a userID then a new card is created. Else it just
 		// displays the current amount of punches.
 		if (pcardRepo.findByUserId(user.getId()) == null) {
@@ -61,26 +63,35 @@ public class PunchCardController {
 			pcard.setPunch(newCardImage);
 			pcard.setPromoId(busPromo.getId());
 			pcardRepo.save(pcard);
-			ModelMap currentPunch = model.addAttribute("punchcard", pcard.getPunch());
+			model.addAttribute("punchcard", pcard.getPunch());
 		} else {
 			// This is building the EL Tag as well as setting the value to the Punchcard Class/Bean (I Think)
 			model.addAttribute("punchcard", pcardRepo.findByUserId(user.getId()).getPunch());
-			model.addAttribute("username", user.getUsername());
 		}
+		
+		// TEST CODE
+		model.addAttribute("redeem", "disabled");
+		System.out.println(model.getAttribute("punchcard"));
+		if(model.getAttribute("punchcard").equals("/img/punchcards/JoesTopDog/TD-Punch-7.png")) {
+			model.replace("redeem", "enable");
+		}
+		
+//		System.out.println(model.getAttribute("redeem"));
+//		System.out.println(model.getAttribute("redeem"));
+		// END OF TEST CODE
 		
 		return "biz-joestopdog";
 	}
 	
 	@RequestMapping(value = "/punch")
-	public String addPunchToCard(@ModelAttribute("punchcard") PunchCard pcard, ModelMap model, HttpSession session) {
+	public String addPunchToCard(@ModelAttribute("punchcard") PunchCard pcard, @RequestParam String punchPassword, ModelMap model, HttpSession session) {
 		
 		User user = (User) session.getAttribute("user");
+		model.addAttribute("username", user.getUsername());
+		// Getting the session that was created when the getPunchcard method was invoked. (Method above)
 		Business bus = (Business) session.getAttribute("business");
 		
-		// TODO: pass the business name somehow so this can be used for multiple businesses.
-		// Finding the business and then finding their promotion.
-		// TODO: Set a session to a business when the card for that business is requested. 
-		// (ie. in the above method create the business session and set the attribute. Reference the LoginController)
+		
 		long busId = busRepo.findByBusName("JoesTopDog").getId();
 		
 		Promotion busPromo = promoRepo.findByBusId(busId);
@@ -90,13 +101,11 @@ public class PunchCardController {
 
 		String currentPunch = pcard.getPunch();
 		
-		// TEST CODE
-		ModelMap tpass = model.addAttribute("punchPassword", "password");
-		System.out.println(tpass);
-//		String test = 
-		// END OF TEST CODE
+		model.addAttribute("punchPassword", punchPassword);
+		String authCode = model.getAttribute("punchPassword").toString();
+		System.out.println(authCode);
 
-		if (currentPunch != null) {
+		if (currentPunch != null && bus.getPunchPassword().equals(authCode)) {
 
 			switch (currentPunch) {
 			case "/img/punchcards/JoesTopDog/TD-Punch-0.png":
@@ -139,14 +148,12 @@ public class PunchCardController {
 			}
 		}
 		
-//		if (pcard.getPunch().equalsIgnoreCase("/img/punchcards/JoesTopDog/TD-Punch-7.png")) {
-//			System.out.println("Changed to enabled!!!");
-//		}
-
 		model.addAttribute("punchcard", pcard.getPunch());
 		pcardRepo.save(pcard);
 
 		return "biz-joestopdog";
 
 	}
+	
+	
 }

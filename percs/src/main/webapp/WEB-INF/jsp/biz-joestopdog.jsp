@@ -28,16 +28,26 @@
             	<label>Code</label>
             	<input type="password" name="punchPassword" value="">
             	<button type="submit" name="button">Punch!</button>
-            	<button type="button" name="redeem" disabled formaction="???">Redeem</button>
+            	<button type="button" name="redeem" ${redeem} formaction="???">Redeem</button>
           </form>
         </div>
         
         <div class="main-info-section-2">
           <h1>Hello ${username} this is your current Joe's Top Dog punch card.</h1>
-          <div><img src="${punchcard}" style="width:100%" alt=""></div>
+          <div><img src="${punchcard}" style="width:100%;" alt=""></div>
 
         </div>
     </div>
+    </div>
 
 </body>
+
+<script>
+function disableBtn() {
+if( /* the punch is the last one use an EL tag here */) {
+  document.getElementByName("myBtn").disabled = false;
+}
+
+</script>
+
 </html>

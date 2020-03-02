@@ -53,6 +53,46 @@ public class MainController {
 	public String registerCard() {
 		return "test";
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ANYTHING BELOW THIS COMMENT IS TEST, INCOMPLETE, OR DEAD CODE!!!
+	 */
+	
+	
+	@PostMapping(path = "/card")
+	public String userGetsNewPunchCard(@ModelAttribute("user") User user, @RequestParam String username, @RequestParam String busName, ModelMap model) {
+		model.addAttribute("username", user.getUsername());
+		model.getAttribute("username");
+		
+		User n = userRepo.findByUsername(username);
+		Business bus = busRepo.findByBusName(busName);
+		Promotion promo = promoRepo.findByBusId(bus.getId());
+		PunchCard pcard = pcardRepo.findByUserId(n.getId());
+		
+		// This only builds a new punch card if the user does not have one already.
+		if(pcard == null) {
+			PunchCard pc = new PunchCard();
+			pc.setUser(n);
+			pc.setPromoId(promo.getId());
+			pc.setPunch(promo.getStartImg());
+			pc.setBusId(bus.getId());
+			pcardRepo.save(pc);
+		} else {
+			return "test";
+			
+		}
+		return "home";
+		
+	}
+
 	
 //	@PostMapping(path = "/add") // Map ONLY POST Requests
 ////	public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
@@ -66,44 +106,6 @@ public class MainController {
 //		return "test";
 //
 //	}
-	
-	@PostMapping(path = "/card")
-	public String userGetsNewPunchCard(@ModelAttribute("user") User user, @RequestParam String username, @RequestParam String busName, ModelMap model) {
-		model.addAttribute("username", user.getUsername());
-		model.getAttribute("username");
-
-		User n = userRepo.findByUsername(username);
-		Business bus = busRepo.findByBusName(busName);
-		Promotion promo = promoRepo.findByBusId(bus.getId());
-		PunchCard pcard = pcardRepo.findByUserId(n.getId());
-		
-		// This only builds a new punch card if the user does not have one already.
-		if(pcard == null) {
-		PunchCard pc = new PunchCard();
-		pc.setUser(n);
-		pc.setPromoId(promo.getId());
-		pc.setPunch(promo.getStartImg());
-		pc.setBusId(bus.getId());
-		pcardRepo.save(pc);
-		} else {
-			return "test";
-			
-		}
-		return "home";
-		
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	 * ANYTHING BELOW THIS COMMENT IS TEST OR INCOMPLETE CODE!!!
-	 */
 	
 	// the value = "/test" is how the action is called from the form but also will change the url. 
 	@RequestMapping(value = "/test", method = RequestMethod.POST)

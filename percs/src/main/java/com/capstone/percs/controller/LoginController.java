@@ -52,7 +52,7 @@ public class LoginController {
 			return "/businesses";
 
 		} else {
-			return "login-error";
+			return "/registerLogin";
 
 		}
 	}
@@ -60,14 +60,18 @@ public class LoginController {
 	
 	@PostMapping(path = "/registered") // Map ONLY POST Requests
 //	public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
-	public String addNewUser(@RequestParam String userName, @RequestParam String email, @RequestParam String pass) {
+	public String addNewUser(@ModelAttribute("user") User user, @RequestParam String userName, @RequestParam String email, @RequestParam String pass, HttpSession session) {
 		User n = new User();
 		n.setUsername(userName);
 		n.setPassword(pass);
 		n.setEmail(email);
 		userRepo.save(n);
-
-		return "test";
+		
+		session.setAttribute("username", n.getUsername());
+		session.setAttribute("user", n);
+		
+		
+		return "businesses";
 
 	}
 

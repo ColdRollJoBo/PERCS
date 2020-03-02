@@ -5,11 +5,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/css/master.css">
-<title>Insert title here</title>
+<title>P.E.R.C.S.</title>
 </head>
 <body>
 
 	<div class="nav-bar">
+		<!-- <img src="/img/site-art/percs-icon.png" style="width: 50%" alt=""> -->
+		 <img src="/img/site-art/percs-icon.png" alt="">
 		<div class="nav-container">
 			<a href="home" class="nav-item-home">Home</a> 
 			<a href="register" class="nav-item-login">Login</a>
