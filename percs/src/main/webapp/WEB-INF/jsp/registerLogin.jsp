@@ -10,20 +10,25 @@
 </head>
 <body>
 
+	<div class="nav-bar">
+		<div class="nav-container">
+			<a href="home" class="nav-item-home">Home</a> 
+		</div>
+	</div>
+
 	<div class="login-wrap" style="margin-top: 50px">
 		<div class="login-html">
 			<form action="login" method="post" modelAttribute="user">
-				
+
 				<input id="tab-1" type="radio" name="tab" class="sign-in" checked>
 				<label for="tab-1" class="tab">Sign In</label> 
-				
-				<input id="tab-2" type="radio" name="tab" class="sign-up">
-				<label for="tab-2" class="tab">Sign Up</label>
-				
+				<input id="tab-2" type="radio" name="tab" class="sign-up"> <label for="tab-2"
+					class="tab">Sign Up</label>
+
 				<div class="login-form">
 					<div class="sign-in-htm">
 						<div class="group">
-							<label for="user" class="label">Username</label> 
+							<label for="user" class="label">Username</label>
 							<input id="user" name="username" type="text" class="input">
 						</div>
 						<div class="group">
@@ -40,9 +45,8 @@
 						</div>
 						<div class="hr"></div>
 						<div class="foot-lnk">
-						<img src="/img/site-art/percs-icon.png" style="width: 40%"
-						alt="">
-						<!-- 	<a href="#forgot">Forgot Password?</a> -->
+							<img src="/img/site-art/percs-icon.png" style="width: 40%" alt="">
+							<!-- 	<a href="#forgot">Forgot Password?</a> -->
 						</div>
 					</div>
 					<div class="sign-up-htm">
@@ -59,11 +63,12 @@
 							<input id="pass" type="password" class="input" data-type="password">
 						</div>
 						<div class="group">
-							<label for="pass" class="label">Email Address</label> <input
-								id="pass" name="email" type="email" class="input">
+							<label for="pass" class="label">Email Address</label>
+							<input id="pass" name="email" type="email" class="input">
 						</div>
 						<div class="group">
-							<input type="submit" class="button" value="Sign Up" formaction="registered">
+							<input type="submit" class="button" value="Sign Up"
+								formaction="registered">
 						</div>
 						<div class="hr"></div>
 						<div class="foot-lnk">

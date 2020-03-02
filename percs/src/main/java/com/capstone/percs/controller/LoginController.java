@@ -33,9 +33,6 @@ public class LoginController {
 	// The ModelAttribute "user" pertains to the class/bean called User.
 	public String validateUserCredentials(@ModelAttribute("user") User user, ModelMap model, HttpSession session) {
 		
-		
-		
-		
 		// This associates the attribute from the input 'name=username' in the jsp and must be the same name as the 
 		// attribute in the the class/bean
 		ModelMap userLogin = model.addAttribute("username", user.getUsername());

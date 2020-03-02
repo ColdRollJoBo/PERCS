@@ -89,3 +89,13 @@ body {
   border-radius: 25px;
   /* width: 400px; */
 }
+
+.punchcard-container {
+  display: grid;
+  grid-row-start: 1;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  justify-self: center;
+  width: minmax(100px, 1fr);
+
+}
