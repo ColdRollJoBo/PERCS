@@ -10,8 +10,10 @@
 <body>
 
 <div class="nav-bar">
+ <img src="/img/site-art/percs-icon.png" alt="">
       <div class="nav-container">
         <a href="home" class="nav-item-home">Home</a>
+        <a href="businesses" class="nav-item-login">Business</a>
         <!-- May want to make an account access link here -->
         Hello ${username}
       </div>
@@ -28,8 +30,8 @@
             	<label>Code</label>
             	<input type="password" name="punchPassword" value="">
             	<button type="submit" name="button">Punch!</button>
-            	<button type="button" name="redeem" ${redeem} formaction="???">Redeem</button>
           </form>
+            	<button ${redeem} onclick="window.location.href = 'reset-punch';">Redeem</button>
         </div>
         
         <div class="main-info-section-2">

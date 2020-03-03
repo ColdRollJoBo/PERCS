@@ -17,6 +17,8 @@
 
 
     <div class="nav-bar">
+     <img src="/img/site-art/percs-icon.png" alt="">
+    
       <div class="nav-container">
         <a href="home" class="nav-item-home">Home</a>
         <a href="register" class="nav-item-login">Welcome ${username}</a>

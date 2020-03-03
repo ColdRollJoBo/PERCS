@@ -53,6 +53,11 @@ public class MainController {
 	public String registerCard() {
 		return "test";
 	}
+	
+	@RequestMapping("/businesses")
+	public String businessesPage() {
+		return "businesses";
+	}
 
 	
 	
