@@ -59,7 +59,6 @@ public class LoginController {
 	
 	
 	@PostMapping(path = "/registered") // Map ONLY POST Requests
-//	public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
 	public String addNewUser(@ModelAttribute("user") User user, @RequestParam String userName, @RequestParam String email, @RequestParam String pass, HttpSession session) {
 		User n = new User();
 		n.setUsername(userName);
